@@ -1,0 +1,101 @@
+using System;
+
+namespace Function
+{
+    public class Class1
+    {
+       
+        public static void SqFunc(double[] M)
+        {
+            int N = 100;
+            M = new double[N];
+            bool flag = true;
+            int i;
+            for (i =0; i<=N & flag; i++)
+            {
+                M[i] = Convert.ToInt32(Console.ReadLine());
+                if (M[i] == 0)
+                {
+                    goto exit;
+                }
+            }
+
+        exit:
+
+            switch (i)
+            {
+                case 1:
+                    Class1.Circle(M);
+                    break;
+
+                case 2:
+                    Class1.Nangle(M);
+                    break;
+
+                case 3:
+                    Class1.Tringle(M);
+                    break;
+
+                default:
+                    Console.WriteLine("Неверные входные условия");
+                    Console.ReadLine();
+                    break;
+            }
+        }
+
+    private static void Circle(double[] M)
+        {
+            double pi = 3.141592;
+            double S = pi * Math.Pow(M[0], 2);
+            Console.WriteLine("Площадь круга = {0}", S);
+            Console.ReadLine();
+        }
+
+    private static void Tringle(double[] M)
+        {
+            bool TF = false;
+            double min = M[0], sr;
+            double max = 0;
+            int j;
+            for (j = 0; j <= 2; j++)
+            {
+                if (M[j] > max)
+                {
+                    max = M[j];
+                }
+                if (M[j] < min)
+                {
+                    min = M[j];
+                }
+            }
+            sr = M[0] + M[1] + M[2] - max - min;
+            if (min * min + sr * sr == max * max)
+            {
+                TF = true;
+            }
+            if (TF == true)
+            {
+                Console.WriteLine("Треугольник прямоугольный");
+                double S = sr * min / 2;
+                Console.WriteLine("Площадь треугольника = {0}", S);
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Треугольник НЕ прямоугольный");
+                double p = (M[0] + M[1] + M[2]) / 2;
+                double S = Math.Sqrt(p * (p - M[0]) * (p - M[1]) * (p - M[2]));
+                Console.WriteLine("Площадь треугольника = {0}", S);
+                Console.ReadLine();
+            }
+        }
+
+        private static void Nangle(double[] M)
+        {
+            double pi = 3.141592;
+            double S = M[0] * Math.Pow(M[1], 2) / (4 * Math.Tan(pi / M[0]));
+            Console.WriteLine("Площадь правильного n угольника = {0}", S);
+            Console.ReadLine();
+        }
+    }
+}
